@@ -1,21 +1,16 @@
+"use client";
+
 import Image from "next/image";
 import SearchBar from "./SearchBar";
 import Navbar from "./Navbar";
 
 export default function Hero() {
   return (
-    <>
-      {/* Navbar */}
+    <div className=" bg-[linear-gradient(to_bottom,#53A9BC,#5C89C3,#8292DC,#FBF3F3)]">
       <Navbar />
 
-      {/* Hero Section */}
-      <section
-        className="
-            pt-32 pb-30 
-            bg-[linear-gradient(to_bottom,#53A9BC,#5C89C3,#8292DC,#FBF3F3)]
-        "
-        >
-        <div className="grid md:grid-cols-2 gap-10 items-center container mx-auto px-4">
+      <section className="min-h-screen mx-auto max-w-7xl">
+        <div className="pt-32 pb-30 grid md:grid-cols-2 gap-10 items-center container mx-auto px-4">
           <div>
             <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight">
               Menuju kampus impian? <br />
@@ -42,9 +37,8 @@ export default function Hero() {
               className="relative z-20 object-contain top-0 right-0 md:top-10 md:-right-10"
             />
           </div>
-
         </div>
       </section>
-    </>
+    </div>
   );
 }
