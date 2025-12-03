@@ -1,13 +1,15 @@
 "use client";
 import Hero from "./components/home/Hero";
-import CollegeSlider from "./components/home/CollegeSlider";
+import EnteranceInfor from "./components/home/EntranceInfor";
+// import CollegeSlider from "./components/home/CollegeSlider";
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen ">
+    <main className="">
 
       <Hero />
-      <CollegeSlider />
+      <EnteranceInfor/>
+      {/* <CollegeSlider /> */}
     </main>
   );
 }
