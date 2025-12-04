@@ -1,4 +1,4 @@
-import { Crown, Bell, BarChart3, Target, Zap, Shield, Gift, Database } from 'lucide-react';
+import { Crown, Bell, BarChart3, Target, Zap, Shield, Gift } from 'lucide-react';
 
 // interface PremiumFeaturesProps {
 //   onGetStarted?: () => void;
