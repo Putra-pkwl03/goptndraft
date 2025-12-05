@@ -2,13 +2,42 @@
 
 import { useState } from "react";
 import { Mail, Lock, ArrowRight, Eye, EyeOff } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { loginStudent } from "@/lib/auth/login";
 
 export default function Login() {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      const response = await loginStudent({
+        email: formData.email,
+        password: formData.password,
+      });
+
+      console.log("Login success:", response);
+      localStorage.setItem("token", response.token);
+
+      alert("Login berhasil!");
+      router.push("/dashboard-siswa");
+
+    } catch (err) {
+      let message = "Terjadi kesalahan";
+
+      if (err instanceof Error) {
+        message = err.message || message;
+      }
+
+      alert(message);
+    }
+  };
 
   return (
     <div className="min-h-[calc(100vh-64px)] flex items-center justify-center py-12 px-4">
@@ -24,7 +53,7 @@ export default function Login() {
 
         {/* Login Form */}
         <div className="bg-white rounded-2xl shadow-xl p-8">
-          <form className="space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-5">
             {/* Email Input */}
             <div>
               <label className="block text-sm font-medium mb-2">Email</label>
