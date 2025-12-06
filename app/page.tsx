@@ -1,7 +1,8 @@
 "use client";
 import Hero from "./components/home/Hero";
 import EnteranceInfor from "./components/home/EntranceInfor";
-// import CollegeSlider from "./components/home/CollegeSlider";
+import PremiumFeature from "./components/home/PremiumFeature";
+import { Footer } from "./components/home/Footer";
 
 export default function HomePage() {
   return (
@@ -9,7 +10,9 @@ export default function HomePage() {
 
       <Hero />
       <EnteranceInfor/>
-      {/* <CollegeSlider /> */}
+      <PremiumFeature />
+      <Footer />
+      
     </main>
   );
 }
