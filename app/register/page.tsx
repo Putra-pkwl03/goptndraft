@@ -150,14 +150,15 @@ export default function Register() {
     <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full">
         {/* Header */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-linear-to-br from-blue-600 to-purple-600 rounded-2xl mb-4">
-            <span className="text-white font-bold text-2xl">GP</span>
-          </div>
-          <h2 className="mb-2">Daftar Akun Baru</h2>
+        <div className="text-center mb-0">
+          <h2 className="text-xl font-bold">Daftar Akun</h2>
+          {/* <div className="inline-flex items-center justify-center w-16 h-16 bg-linear-to-br from-blue-600 to-purple-600 rounded-2xl mb-4">
+            <Image src="/assets/logo.png" alt="Logo" width={50} height={50} />
+          </div> */}
+          {/* <h2 className="mb-2">Daftar Akun Baru</h2>
           <p className="text-gray-600">
             Lengkapi data diri Anda untuk membuat akun Go PTN
-          </p>
+          </p> */}
         </div>
 
         {/* Register Form */}
@@ -176,7 +177,7 @@ export default function Register() {
                   value={formData.name}
                   onChange={handleChange}
                   placeholder="Masukkan nama lengkap"
-                  className={`w-full pl-12 pr-4 py-3 border-2 rounded-lg focus:outline-none transition-all ${
+                  className={`w-full pl-12 pr-4 py-2 border-2 rounded-lg focus:outline-none transition-all ${
                     errors.name
                       ? "border-red-500 focus:border-red-500"
                       : "border-gray-200 focus:border-purple-500"
@@ -199,7 +200,7 @@ export default function Register() {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="nama@email.com"
-                  className={`w-full pl-12 pr-4 py-3 border-2 rounded-lg focus:outline-none transition-all ${
+                  className={`w-full pl-12 pr-4 py-2 border-2 rounded-lg focus:outline-none transition-all ${
                     errors.email
                       ? "border-red-500 focus:border-red-500"
                       : "border-gray-200 focus:border-purple-500"
@@ -224,7 +225,7 @@ export default function Register() {
                   value={formData.no_telp}
                   onChange={handleChange}
                   placeholder="08123456789"
-                  className={`w-full pl-12 pr-4 py-3 border-2 rounded-lg focus:outline-none transition-all ${
+                  className={`w-full pl-12 pr-4 py-2 border-2 rounded-lg focus:outline-none transition-all ${
                     errors.no_telp
                       ? 'border-red-500 focus:border-red-500'
                       : 'border-gray-200 focus:border-purple-500'
@@ -247,7 +248,7 @@ export default function Register() {
                   value={formData.password}
                   onChange={handleChange}
                   placeholder="Minimal 6 karakter"
-                  className={`w-full pl-12 pr-12 py-3 border-2 rounded-lg focus:outline-none transition-all ${
+                  className={`w-full pl-12 pr-12 py-2 border-2 rounded-lg focus:outline-none transition-all ${
                     errors.password
                       ? "border-red-500 focus:border-red-500"
                       : "border-gray-200 focus:border-purple-500"
@@ -283,7 +284,7 @@ export default function Register() {
                   value={formData.confirmPassword}
                   onChange={handleChange}
                   placeholder="Ketik ulang password"
-                  className={`w-full pl-12 pr-12 py-3 border-2 rounded-lg focus:outline-none transition-all ${
+                  className={`w-full pl-12 pr-12 py-2 border-2 rounded-lg focus:outline-none transition-all ${
                     errors.confirmPassword
                       ? "border-red-500 focus:border-red-500"
                       : "border-gray-200 focus:border-purple-500"
@@ -320,14 +321,14 @@ export default function Register() {
                       setErrors((prev) => ({ ...prev, privacy: "" }));
                     }
                   }}
-                  className="w-5 h-5 mt-0.5 text-purple-600 border-2 border-gray-300 rounded focus:ring-2 focus:ring-purple-500 cursor-pointer"
+                  className="w-3 h-3 mt-0.5 text-purple-600 border-2 border-gray-300 rounded focus:ring-2 focus:ring-purple-500 cursor-pointer"
                 />
-                <span className="text-sm text-gray-700">
+                <span className="text-xs text-gray-700">
                   Saya telah membaca dan menyetujui{" "}
                   <button
                     type="button"
                     onClick={() => setShowPrivacyDialog(true)}
-                    className="text-purple-600 hover:underline font-medium"
+                    className="text-purple-600 hover:underline text-xs"
                   >
                     Kebijakan Privasi
                   </button>
@@ -364,7 +365,7 @@ export default function Register() {
 
           {/* Navigate to Login */}
           <button
-            // onClick={onNavigateToLogin}
+            onClick={() => router.push("/login")}
             className="w-full py-3 border-2 border-gray-200 text-gray-700 rounded-lg hover:bg-gray-50 transition-all"
           >
             Masuk ke Akun

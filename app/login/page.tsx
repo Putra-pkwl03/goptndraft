@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Mail, Lock, ArrowRight, Eye, EyeOff } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { loginStudent } from "@/lib/auth/login";
+import Image from "next/image";
 
 export default function Login() {
   const router = useRouter();
@@ -40,12 +41,12 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-64px)] flex items-center justify-center py-12 px-4">
+    <div className="min-h-[calc(100vh-64px)] flex items-center justify-center py-8 px-4">
       <div className="max-w-md w-full">
         {/* Header */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-linear-to-br from-blue-600 to-purple-600 rounded-2xl mb-4">
-            <span className="text-white font-bold text-2xl">GP</span>
+        <div className="text-center mb-4">
+          <div className="flex items-center justify-center">
+            <Image src="/assets/logo.png" alt="Logo" width={120} height={120} />
           </div>
           <h2 className="mb-2">Masuk ke Akun Anda</h2>
           <p className="text-gray-600">Dapatkan akses ke fitur premium Anda</p>
@@ -66,7 +67,7 @@ export default function Login() {
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
                   }
-                  className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:outline-none transition-all"
+                  className="w-full pl-12 pr-4 py-2 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:outline-none transition-all"
                   placeholder="nama@email.com"
                 />
               </div>
@@ -84,7 +85,7 @@ export default function Login() {
                   onChange={(e) =>
                     setFormData({ ...formData, password: e.target.value })
                   }
-                  className="w-full pl-12 pr-12 py-3 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:outline-none transition-all"
+                  className="w-full pl-12 pr-12 py-2 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:outline-none transition-all"
                   placeholder="Masukkan password"
                   minLength={6}
                 />
@@ -132,7 +133,9 @@ export default function Login() {
           </div>
 
           {/* Navigate to Register */}
-          <button className="w-full py-3 border-2 border-gray-200 text-gray-700 rounded-lg hover:bg-gray-50 transition-all">
+          <button 
+            onClick={() => router.push("/register")}
+            className="w-full py-3 border-2 border-gray-200 text-gray-700 rounded-lg hover:bg-gray-50 transition-all">
             Daftar Akun Baru
           </button>
         </div>
