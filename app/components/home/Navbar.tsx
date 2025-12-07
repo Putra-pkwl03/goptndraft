@@ -11,7 +11,13 @@ import {
 } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
-const navigation = [
+type NavItem = {
+  name: string;
+  href: string;
+  current: boolean;
+};
+
+const navigation: NavItem[] = [
   { name: "Kampus", href: "#", current: false },
   { name: "Jurusan", href: "#", current: false },
   { name: "Beasiswa", href: "#", current: false },
@@ -20,24 +26,20 @@ const navigation = [
   { name: "Tes Potensi", href: "#", current: false },
 ];
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-
 export default function Navbar() {
   const router = useRouter();
-  const [isLoggedIn, setIsLoggedIn] = useState(() => {
-    if (typeof window !== "undefined") {
-      return !!localStorage.getItem("token");
-    }
-    return false;
-  });
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
+    const token = localStorage.getItem("token");
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIsLoggedIn(Boolean(token));
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -48,6 +50,7 @@ export default function Navbar() {
     router.push("/login");
   }
 
+  
   return (
     <Disclosure
       as="nav"
@@ -55,38 +58,30 @@ export default function Navbar() {
     >
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
+
+          {/* Mobile menu button */}
           <div className="absolute inset-y-0 left-0 flex items-center lg:hidden">
-            {/* Mobile menu button*/}
-            <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-white focus:outline-2 focus:-outline-offset-1 focus:outline-indigo-500">
-              <span className="absolute -inset-0.5" />
+            <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-white">
               <span className="sr-only">Open main menu</span>
-              <Bars3Icon
-                aria-hidden="true"
-                className="block size-6 text-white group-data-open:hidden"
-              />
-              <XMarkIcon
-                aria-hidden="true"
-                className="hidden size-6 text-white group-data-open:block"
-              />
+              <Bars3Icon className="block h-6 w-6 ui-open:hidden" />
+              <XMarkIcon className="hidden h-6 w-6 ui-open:block" />
             </DisclosureButton>
           </div>
+
+          {/* Logo + nav */}
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex shrink-0 items-center">
-              <span
-                className={`text-2xl font-bold group-data-open:text-white ${
-                  scrolled ? "text-blue-900" : "text-white"
-                }`}
-              >
+              <span className={`text-2xl font-bold ${scrolled ? "text-blue-900" : "text-white"}`}>
                 <Link href="/">GO PTN</Link>
               </span>
             </div>
+
             <div className="hidden sm:ml-6 lg:block">
               <div className="flex space-x-4">
                 {navigation.map((item) => (
                   <a
                     key={item.name}
                     href={item.href}
-                    aria-current={item.current ? "page" : undefined}
                     className="text-blue-900 rounded-md px-3 py-2 text-md font-medium"
                   >
                     {item.name}
@@ -95,6 +90,8 @@ export default function Navbar() {
               </div>
             </div>
           </div>
+
+          {/* Login / Logout */}
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
             <div className="hidden md:flex items-center space-x-3 ml-auto">
               {!isLoggedIn ? (
@@ -124,6 +121,7 @@ export default function Navbar() {
         </div>
       </div>
 
+      {/* Mobile menu panel */}
       <DisclosurePanel className="sm:hidden bg-[#0A142F]">
         <div className="space-y-1 px-2 pt-2 pb-3">
           {navigation.map((item) => (
@@ -131,13 +129,7 @@ export default function Navbar() {
               key={item.name}
               as="a"
               href={item.href}
-              aria-current={item.current ? "page" : undefined}
-              className={classNames(
-                item.current
-                  ? "bg-gray-950/50 text-white"
-                  : "text-gray-300 hover:bg-white/5 hover:text-white",
-                "block rounded-md px-3 py-2 text-base font-medium"
-              )}
+              className="block rounded-md px-3 py-2 text-base font-medium text-gray-300"
             >
               {item.name}
             </DisclosureButton>
