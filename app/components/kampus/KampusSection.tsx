@@ -6,6 +6,7 @@ import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { KampusDetailPage } from "../kampus/KampusDetailPage";
 import type { Kampus } from "@/types/kampus";
 import { kampusFallback } from "@/app/src/data/data";
+import { useRouter } from "next/navigation";
 
 type UIKampus = {
   id: number;
@@ -22,9 +23,10 @@ type UIKampus = {
 };
 
 export function KampusSection({ kampusList }: { kampusList: Kampus[] }) {
+    const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
   const [filterWilayah, setFilterWilayah] = useState("all");
-  const [selectedKampus, setSelectedKampus] = useState<UIKampus | null>(null);
+  // const [selectedKampus, setSelectedKampus] = useState<UIKampus | null>(null);
 
   const mappedList: UIKampus[] = kampusList.map((k) => {
   const fallback = kampusFallback[k.id] || {};
@@ -70,14 +72,14 @@ export function KampusSection({ kampusList }: { kampusList: Kampus[] }) {
     return matchSearch && matchWilayah;
   });
 
-  if (selectedKampus) {
-    return (
-      <KampusDetailPage
-        kampus={selectedKampus}
-        onBack={() => setSelectedKampus(null)}
-      />
-    );
-  }
+  // if (selectedKampus) {
+  //   return (
+  //     <KampusDetailPage
+  //       kampus={selectedKampus}
+  //       onBack={() => setSelectedKampus(null)}
+  //     />
+  //   );
+  // }
 
   return (
     <div id="kampus-section" className="py-16 bg-white">
@@ -147,7 +149,7 @@ export function KampusSection({ kampusList }: { kampusList: Kampus[] }) {
             <div
               key={kampus.id}
               className="bg-white rounded-lg border border-gray-200 hover:border-gray-400 transition-all overflow-hidden group cursor-pointer"
-              onClick={() => setSelectedKampus(kampus)}
+               onClick={() => router.push(`/kampus/${kampus.id}`)}
             >
               <div className="relative h-48 overflow-hidden">
                 <ImageWithFallback
