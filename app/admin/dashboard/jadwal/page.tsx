@@ -1,14 +1,7 @@
 
-﻿import  KelolaJadwalSection  from "@/app/components/dashboard-admin/KelolaJadwalSection";
+"use client";
 
-export default function Page() {
-  return (
-    <KelolaJadwalSection />
-  )
-}
-
-﻿"use client";
-
+import KelolaJadwalSection from "@/app/components/dashboard-admin/KelolaJadwalSection";
 import { useState } from "react";
 import AddJadwalModal, { JadwalForm } from "../../../components/dashboard-admin/AddJadwalModal";
 import { Plus, Eye, EyeOff, Edit2, Trash2 } from "lucide-react";
